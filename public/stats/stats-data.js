@@ -15,8 +15,8 @@ const EXERCISES = [
 ];
 
 const COLORS = {
-  Elite: '#ffd700', Advanced: '#ff9090', Intermediate: '#ffaa66',
-  Novice: '#4499ee', Beginner: '#777', none: '#333'
+  Elite: '#ffd700', Advanced: '#ff8888', Intermediate: '#cc44ff',
+  Novice: '#66ccff', Beginner: '#44ff88', none: '#333'
 };
 
 let userData    = { bodyWeight: 70, sex: 'male' };
@@ -29,9 +29,6 @@ function epley(weight, reps) {
   return reps > 1 ? weight * (1 + reps / 30) : weight;
 }
 
-// Returns the effective 1RM in the same unit as the thresholds compare against:
-// - non-BW exercises: lifted kg
-// - BW exercises: additional kg (subtract bodyWeight after epley on total)
 function effective1RM(ex, weight, reps, bw) {
   if (ex.bw) {
     const total1RM = epley(bw + weight, reps);
@@ -88,13 +85,13 @@ function render() {
   );
 
   document.getElementById('exerciseList').innerHTML = computed.map(({ ex, entry, eff, inf }) => {
-    const lvl   = inf.level || 'none';
-    const cls   = lvl.toLowerCase();
-    const pct   = Math.round(inf.prog * 100);
-    const c     = COLORS[lvl] || COLORS.none;
-    const fill  = `repeating-linear-gradient(90deg,${c} 0,${c} 5px,transparent 5px,transparent 9px)`;
-    const cur   = entry ? fmt(eff) : '---';
-    const next  = fmt(inf.nextTh);
+    const lvl  = inf.level || 'none';
+    const cls  = lvl.toLowerCase();
+    const pct  = Math.round(inf.prog * 100);
+    const c    = COLORS[lvl] || COLORS.none;
+    const fill = `repeating-linear-gradient(90deg,${c} 0,${c} 5px,transparent 5px,transparent 9px)`;
+    const cur  = entry ? fmt(eff) : '---';
+    const next = fmt(inf.nextTh);
 
     return `
       <div class="exercise-card" onclick="openModal('${ex.name}')">
@@ -113,61 +110,13 @@ function render() {
   }).join('');
 }
 
-// --- Modal ---
-
-let activeExName = null;
-
-function openModal(exName) {
-  activeExName = exName;
-  document.getElementById('modalTitle').textContent = exName.toUpperCase();
-  document.getElementById('modalWeight').value = '';
-  document.getElementById('modalReps').value   = '';
-  document.getElementById('modal').classList.add('open');
-  setTimeout(() => document.getElementById('modalWeight').focus(), 50);
-}
-
-function closeModal() {
-  document.getElementById('modal').classList.remove('open');
-  activeExName = null;
-}
-
-async function saveEntry() {
-  const w = parseFloat(document.getElementById('modalWeight').value);
-  const r = parseInt(document.getElementById('modalReps').value, 10);
-  if (isNaN(w) || w < 0 || isNaN(r) || r < 1) return;
-
-  const exId = exerciseIds[activeExName];
-  if (!exId) return;
-
-  await fetch('../../api/entries.php', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ exercise_id: exId, weight: w, reps: r }),
-  });
-
-  entryData[activeExName] = { weight: w, reps: r };
-  closeModal();
-  render();
-}
-
-document.getElementById('modalWeight').addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
-});
-document.getElementById('modalReps').addEventListener('keydown', e => {
-  if (e.key === 'Enter')  saveEntry();
-  if (e.key === 'Escape') closeModal();
-});
-document.getElementById('modal').addEventListener('click', e => {
-  if (e.target.id === 'modal') closeModal();
-});
-
 // --- Bootstrap ---
 
 async function loadData() {
-  const res  = await fetch('../../api/entries.php');
-  const data = await res.json();
+  const res   = await fetch('../../api/entries.php');
+  const data  = await res.json();
   userData    = { bodyWeight: data.bodyWeight, sex: data.sex };
-  entryData   = data.entries   || {};
+  entryData   = data.entries    || {};
   exerciseIds = data.exerciseIds || {};
   render();
 }
