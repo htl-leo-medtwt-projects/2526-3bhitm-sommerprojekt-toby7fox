@@ -17,8 +17,8 @@
 
     .exercise-card {
       margin: 3vh;
-      margin-left: 2.5vh;
-      margin-right: 2.5vh;
+      margin-left: 5vh;
+      margin-right: 5vh;
       cursor: pointer;
 
       display: flex;
@@ -60,7 +60,7 @@
     .icon-star {
       width: 72px;
       height: 72px;
-      background: #ffd700;
+      background: #FFD88F;
       clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
     }
 
@@ -68,15 +68,15 @@
     .icon-diamond {
       width: 60px;
       height: 60px;
-      background: #ff8888;
+      background: #FF8F8F;
       clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
     }
 
     /* Intermediate: purple downward triangle */
     .icon-triangle-down {
-      width: 64px;
-      height: 56px;
-      background: #cc44ff;
+      width: 51.2px;
+      height: 44.8px;
+      background: #E97DFF;
       clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
     }
 
@@ -84,14 +84,14 @@
     .icon-square {
       width: 48px;
       height: 48px;
-      background: #66ccff;
+      background: #7DD8FF;
     }
 
     /* Beginner: green circle */
     .icon-circle {
       width: 44px;
       height: 44px;
-      background: #44ff88;
+      background: #8FFF93;
       border-radius: 50%;
     }
 
@@ -123,8 +123,8 @@
 
     /* Fill = vertical color stripes growing left→right */
     .progress-fill {
-      height: 80%;
-      margin: 5px
+      height: 75%;
+      margin: 1vh
     }
 
     /* Weight text centered inside bar */

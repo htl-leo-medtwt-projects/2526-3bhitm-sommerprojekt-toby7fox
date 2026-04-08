@@ -15,8 +15,8 @@ const EXERCISES = [
 ];
 
 const COLORS = {
-  Elite: '#ffd700', Advanced: '#ff8888', Intermediate: '#cc44ff',
-  Novice: '#66ccff', Beginner: '#44ff88', none: '#333'
+  Elite: '#FFD88F', Advanced: '#FF8F8F', Intermediate: '#E97DFF',
+  Novice: '#7DD8FF', Beginner: '#8FFF93', none: '#333'
 };
 
 let userData    = { bodyWeight: 70, sex: 'male' };
@@ -90,7 +90,7 @@ function render() {
     const cls  = lvl.toLowerCase();
     const pct  = Math.round(inf.prog * 100);
     const c    = COLORS[lvl] || COLORS.none;
-    const fill = `repeating-linear-gradient(90deg,${c} 0,${c} 8px,transparent 5px,transparent 13px)`;
+    const fill = `repeating-linear-gradient(90deg,${c} 0,${c} 1.2vh,transparent 5px,transparent 2vh)`;
     const glow = `drop-shadow(0 0 0.5px ${c}) drop-shadow(0 0 0.5px ${c})`;
     const cur  = entry ? fmt(eff) : '---';
     const next = fmt(inf.nextTh);
