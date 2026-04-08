@@ -1,0 +1,36 @@
+/* ── Bottom navigation bar ── */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 58px;
+  background: #000;
+  border-top: 2px solid #cc44ff;
+  box-shadow: 0 -4px 18px #cc44ff88, 0 -1px 6px #cc44ffcc;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 200;
+}
+
+.nav-item {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: #888;
+  text-decoration: none;
+  letter-spacing: 1px;
+  padding: 8px 12px;
+  transition: color 0.15s;
+}
+
+.nav-item.nav-active,
+.nav-item:hover {
+  color: #fff;
+  text-shadow: 0 0 8px #ff3fa4, 0 0 18px #ff3fa4;
+}
+
+/* XP: larger but same color scheme */
+.nav-item-xp {
+  font-size: 18px;
+}

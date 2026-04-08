@@ -226,9 +226,3 @@
     .btn-ok { background: #ff3fa4; color: #000; }
     .btn-ok:hover { background: #ff6ec4; }
     .btn-cancel { background: transparent; color: #ff3fa4; border: 1px solid #ff3fa4; }
-
-    .logout-btn {
-      position: fixed;
-      bottom: 16px;
-      left: 16px;
-    }

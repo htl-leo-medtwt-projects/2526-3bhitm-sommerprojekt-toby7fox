@@ -14,6 +14,7 @@ if (!isset($_SESSION['user_id'])) {
   <title>STATS</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="stats.css">
+  <link rel="stylesheet" href="../shared/nav.css">
   <script src="stats-data.js"  defer></script>
   <script src="stats-modal.js" defer></script>
 </head>
@@ -33,7 +34,7 @@ if (!isset($_SESSION['user_id'])) {
     </div>
   </div>
 
-  <a href="../../api/auth.php?action=logout" class="logout-btn">Logout</a>
+  <?php $nav_active = 'stats'; require_once '../shared/nav.php'; ?>
 </body>
 
 </html>

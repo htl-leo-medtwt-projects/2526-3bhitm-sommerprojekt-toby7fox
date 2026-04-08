@@ -33,11 +33,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    // Fetch current bodyWeight of user
+    $bwStmt = $conn->prepare("SELECT bodyWeight FROM `user` WHERE user_ID = ?");
+    $bwStmt->bind_param("i", $userId);
+    $bwStmt->execute();
+    $bwRow = $bwStmt->get_result()->fetch_assoc();
+    $bwStmt->close();
+    $bodyWeight = (float)($bwRow['bodyWeight'] ?? 0);
+
     $stmt = $conn->prepare(
-        "INSERT INTO Entry (weight, reps, date, user_user_ID, exercise_exercise_ID)
-         VALUES (?, ?, CURDATE(), ?, ?)"
+        "INSERT INTO Entry (weight, reps, date, bodyWeight, user_user_ID, exercise_exercise_ID)
+         VALUES (?, ?, CURDATE(), ?, ?, ?)"
     );
-    $stmt->bind_param("diii", $weight, $reps, $userId, $exerciseId);
+    $stmt->bind_param("didii", $weight, $reps, $bodyWeight, $userId, $exerciseId);
     $stmt->execute();
     $stmt->close();
 
@@ -70,11 +78,11 @@ while ($row = $result->fetch_assoc()) {
 $entries = [];
 foreach ($exerciseNames as $exName) {
     $stmt = $conn->prepare(
-        "SELECT e.weight, e.reps, e.date
+        "SELECT e.weight, e.reps, e.date, e.bodyWeight
          FROM Entry e
          JOIN exercise ex ON ex.exercise_ID = e.exercise_exercise_ID
          WHERE e.user_user_ID = ? AND ex.exercise = ?
-         ORDER BY e.date DESC, e.weight DESC
+         ORDER BY e.date DESC
          LIMIT 1"
     );
     $stmt->bind_param("is", $userId, $exName);
@@ -84,9 +92,10 @@ foreach ($exerciseNames as $exName) {
 
     if ($row) {
         $entries[$exName] = [
-            'weight' => (float)$row['weight'],
-            'reps'   => (int)$row['reps'],
-            'date'   => $row['date'],
+            'weight'     => (float)$row['weight'],
+            'reps'       => (int)$row['reps'],
+            'date'       => $row['date'],
+            'bodyWeight' => (float)$row['bodyWeight'],
         ];
     }
 }

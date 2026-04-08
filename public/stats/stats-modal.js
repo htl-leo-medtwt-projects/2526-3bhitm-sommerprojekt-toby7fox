@@ -31,7 +31,7 @@ async function saveEntry() {
     body: JSON.stringify({ exercise_id: exId, weight: w, reps: r }),
   });
 
-  entryData[activeExName] = { weight: w, reps: r };
+  entryData[activeExName] = { weight: w, reps: r, bodyWeight: userData.bodyWeight };
   closeModal();
   render();
 }

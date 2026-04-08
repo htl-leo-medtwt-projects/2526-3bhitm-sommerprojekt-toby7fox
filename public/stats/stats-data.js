@@ -75,9 +75,11 @@ function render() {
   const sex = userData.sex;
 
   const computed = EXERCISES.map(ex => {
-    const entry = entryData[ex.name];
-    const eff   = entry ? effective1RM(ex, entry.weight, entry.reps, bw) : 0;
-    const inf   = levelInfo(ex, eff, sex, bw);
+    const entry  = entryData[ex.name];
+    const entBW  = entry?.bodyWeight || bw;
+    const eff    = entry ? effective1RM(ex, entry.weight, entry.reps, entBW) : 0;
+    const inf    = levelInfo(ex, eff, sex, entBW);
+    if (!entry) { inf.li = 0; inf.level = 'Beginner'; inf.prog = 0; }
     return { ex, entry, eff, inf };
   });
 
