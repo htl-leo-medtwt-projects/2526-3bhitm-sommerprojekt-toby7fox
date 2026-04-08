@@ -51,47 +51,59 @@
       z-index: 100;
     }
 
-    /* Elite: gold star with glow */
+    /* All icons: consistent sizing via width/height + clip-path */
+    .icon-star, .icon-diamond, .icon-triangle-down, .icon-square, .icon-circle {
+      flex-shrink: 0;
+    }
+
+    /* Elite: gold star */
     .icon-star {
-      font-size: 30px;
-      color: #ffd700;
-      text-shadow: 0 0 10px #ffd700, 0 0 22px #ffd700, 0 0 44px #ffd700aa, 0 0 70px #ffd70055;
-      line-height: 1;
+      width: 72px;
+      height: 72px;
+      background: #ffd700;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
     }
 
-    /* Advanced/Intermediate: rotated square = diamond */
+    /* Advanced: pink diamond */
     .icon-diamond {
-      width: 50px;
-      height: 50px;
-      background: #ff9090;
-      transform: rotate(45deg);
-      flex-shrink: 0;
-      box-shadow: 0 0 16px #ff9090, 0 0 32px #ff909088, 0 0 55px #ff909044;
+      width: 60px;
+      height: 60px;
+      background: #ff8888;
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
     }
 
-    .icon-inter {
-      background: #ffaa66;
-      box-shadow: 0 0 16px #ffaa66, 0 0 32px #ffaa6688, 0 0 55px #ffaa6644;
+    /* Intermediate: purple downward triangle */
+    .icon-triangle-down {
+      width: 64px;
+      height: 56px;
+      background: #cc44ff;
+      clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
     }
 
-    /* Novice: solid square */
+    /* Novice: light-blue square */
     .icon-square {
-      width: 24px;
-      height: 24px;
-      background: #4499ee;
-      flex-shrink: 0;
-      box-shadow: 0 0 14px #4499ee, 0 0 28px #4499ee88, 0 0 50px #4499ee44;
+      width: 48px;
+      height: 48px;
+      background: #66ccff;
     }
 
-    /* Beginner: small arrow */
-    .icon-tri {
-      font-size: 11px;
-      color: #aaa;
-      text-shadow: 0 0 8px #aaa;
+    /* Beginner: green circle */
+    .icon-circle {
+      width: 44px;
+      height: 44px;
+      background: #44ff88;
+      border-radius: 50%;
     }
 
     /* Unranked */
-    .icon-dot { font-size: 8px; color: #444; }
+    .icon-unranked { background: #333; }
+
+    /* Glow on the container (applied before clip-path of child) */
+    .lvl-icon-elite        { filter: drop-shadow(0 0 6px #ffd700) drop-shadow(0 0 16px #ffd700); }
+    .lvl-icon-advanced     { filter: drop-shadow(0 0 6px #ff8888) drop-shadow(0 0 16px #ff888888); }
+    .lvl-icon-intermediate { filter: drop-shadow(0 0 6px #cc44ff) drop-shadow(0 0 16px #cc44ff88); }
+    .lvl-icon-novice       { filter: drop-shadow(0 0 6px #66ccff) drop-shadow(0 0 16px #66ccff88); }
+    .lvl-icon-beginner     { filter: drop-shadow(0 0 6px #44ff88) drop-shadow(0 0 16px #44ff8844); }
 
     /* Bar + level stacked, fills remaining width */
     .bar-and-level { flex: 1; min-width: 0; }
@@ -103,7 +115,6 @@
       background: #000;
       border: 0.7vh solid #fff;
       box-shadow: 0 0 10px #cc44ff, 0 0 22px #cc44ff88, 0 0 40px #cc44ff44;
-      overflow: hidden;
 
       display: flex;
       align-items: center;
@@ -139,10 +150,10 @@
     }
 
     .lvl-elite        { color: #fff; text-shadow: 0 0 8px #ffd700, 0 0 18px #ffd700; }
-    .lvl-advanced     { color: #fff; text-shadow: 0 0 8px #ff9090, 0 0 18px #ff9090; }
-    .lvl-intermediate { color: #fff; text-shadow: 0 0 8px #ffaa66, 0 0 18px #ffaa66; }
-    .lvl-novice       { color: #fff; text-shadow: 0 0 8px #4499ee, 0 0 18px #4499ee; }
-    .lvl-beginner     { color: #fff; text-shadow: 0 0 6px #888; }
+    .lvl-advanced     { color: #fff; text-shadow: 0 0 8px #ff8888, 0 0 18px #ff8888; }
+    .lvl-intermediate { color: #fff; text-shadow: 0 0 8px #cc44ff, 0 0 18px #cc44ff; }
+    .lvl-novice       { color: #fff; text-shadow: 0 0 8px #66ccff, 0 0 18px #66ccff; }
+    .lvl-beginner     { color: #fff; text-shadow: 0 0 8px #44ff88, 0 0 18px #44ff88; }
     .lvl-none         { color: #555; }
 
   

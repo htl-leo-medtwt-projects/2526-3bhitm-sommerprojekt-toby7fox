@@ -61,11 +61,12 @@ function fmt(n) { return n % 1 === 0 ? String(n) : n.toFixed(1); }
 
 function iconHTML(lvl) {
   switch (lvl) {
-    case 'Elite':        return '<span class="icon-star">★</span>';
+    case 'Elite':        return '<div class="icon-star"></div>';
     case 'Advanced':     return '<div class="icon-diamond"></div>';
-    case 'Intermediate': return '<div class="icon-diamond icon-inter"></div>';
+    case 'Intermediate': return '<div class="icon-triangle-down"></div>';
     case 'Novice':       return '<div class="icon-square"></div>';
-    default:             return '<span class="icon-tri">▶</span>';
+    case 'Beginner':     return '<div class="icon-circle"></div>';
+    default:             return '<div class="icon-circle icon-unranked"></div>';
   }
 }
 
@@ -89,18 +90,19 @@ function render() {
     const cls  = lvl.toLowerCase();
     const pct  = Math.round(inf.prog * 100);
     const c    = COLORS[lvl] || COLORS.none;
-    const fill = `repeating-linear-gradient(90deg,${c} 0,${c} 5px,transparent 5px,transparent 9px)`;
+    const fill = `repeating-linear-gradient(90deg,${c} 0,${c} 8px,transparent 5px,transparent 13px)`;
+    const glow = `drop-shadow(0 0 0.5px ${c}) drop-shadow(0 0 0.5px ${c})`;
     const cur  = entry ? fmt(eff) : '---';
     const next = fmt(inf.nextTh);
 
     return `
       <div class="exercise-card" onclick="openModal('${ex.name}')">
-        <div class="lvl-icon">${iconHTML(inf.level)}</div>
+        <div class="lvl-icon lvl-icon-${cls}">${iconHTML(inf.level)}</div>
         <div class="bar">
           <div class="ex-name">${ex.name}</div>
           <div class="bar-and-level">
             <div class="progress-bar">
-              <div class="progress-fill" style="width:${pct}%;background:${fill}"></div>
+              <div class="progress-fill" style="width:${pct}%;background:${fill};filter:${glow}"></div>
               <div class="weight-txt">${cur} | ${next}kg</div>
             </div>
             <div class="lvl-label lvl-${cls}">${inf.level || '---'}</div>
