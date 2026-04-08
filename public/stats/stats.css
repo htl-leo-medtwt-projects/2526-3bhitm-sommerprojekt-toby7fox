@@ -1,0 +1,247 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: 'Press Start 2P', monospace;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+
+    .phone {
+      width: 100%;
+      max-width: 420px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #000;
+    }
+
+    .exercise-list {
+      flex: 1;
+      overflow-y: auto;
+      padding-bottom: 58px;
+    }
+
+    .exercise-card {
+      padding: 12px 10px 10px 10px;
+      cursor: pointer;
+    }
+
+    .exercise-card:active { background: #0a000a; }
+
+    /* Exercise name: top row, alone, with glow */
+    .ex-name {
+      font-size: 11px;
+      color: #fff;
+      text-shadow: 0 0 8px #ff3fa4, 0 0 18px #ff3fa4;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    /* Icon + bar on same row */
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Icon container */
+    .lvl-icon {
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* Elite: gold star with glow */
+    .icon-star {
+      font-size: 30px;
+      color: #ffd700;
+      text-shadow: 0 0 10px #ffd700, 0 0 22px #ffd700, 0 0 44px #ffd700aa, 0 0 70px #ffd70055;
+      line-height: 1;
+    }
+
+    /* Advanced/Intermediate: rotated square = diamond */
+    .icon-diamond {
+      width: 27px;
+      height: 27px;
+      background: #ff9090;
+      transform: rotate(45deg);
+      flex-shrink: 0;
+      box-shadow: 0 0 16px #ff9090, 0 0 32px #ff909088, 0 0 55px #ff909044;
+    }
+
+    .icon-inter {
+      background: #ffaa66;
+      box-shadow: 0 0 16px #ffaa66, 0 0 32px #ffaa6688, 0 0 55px #ffaa6644;
+    }
+
+    /* Novice: solid square */
+    .icon-square {
+      width: 24px;
+      height: 24px;
+      background: #4499ee;
+      flex-shrink: 0;
+      box-shadow: 0 0 14px #4499ee, 0 0 28px #4499ee88, 0 0 50px #4499ee44;
+    }
+
+    /* Beginner: small arrow */
+    .icon-tri {
+      font-size: 11px;
+      color: #aaa;
+      text-shadow: 0 0 8px #aaa;
+    }
+
+    /* Unranked */
+    .icon-dot { font-size: 8px; color: #444; }
+
+    /* Bar + level stacked, fills remaining width */
+    .bar-and-level { flex: 1; min-width: 0; }
+
+    /* Progress bar: black inside, WHITE border, PURPLE outer glow */
+    .progress-bar {
+      position: relative;
+      height: 22px;
+      background: #000;
+      border: 2px solid #fff;
+      box-shadow: 0 0 10px #cc44ff, 0 0 22px #cc44ff88, 0 0 40px #cc44ff44;
+      overflow: hidden;
+    }
+
+    /* Fill = vertical color stripes growing left→right */
+    .progress-fill {
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      /* background set inline with level color */
+    }
+
+    /* Weight text centered inside bar */
+    .weight-txt {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7px;
+      color: #fff;
+      z-index: 2;
+      white-space: nowrap;
+      letter-spacing: 1px;
+
+      text-shadow: 0 0 8px #ff3fa4, 0 0 18px #ff3fa4;
+    }
+
+    /* Level label below bar */
+    .lvl-label {
+      font-size: 7px;
+      margin-top: 4px;
+    }
+
+    .lvl-elite        { color: #fff; text-shadow: 0 0 8px #ffd700, 0 0 18px #ffd700; }
+    .lvl-advanced     { color: #fff; text-shadow: 0 0 8px #ff9090, 0 0 18px #ff9090; }
+    .lvl-intermediate { color: #fff; text-shadow: 0 0 8px #ffaa66, 0 0 18px #ffaa66; }
+    .lvl-novice       { color: #fff; text-shadow: 0 0 8px #4499ee, 0 0 18px #4499ee; }
+    .lvl-beginner     { color: #fff; text-shadow: 0 0 6px #888; }
+    .lvl-none         { color: #555; }
+
+    /* --- Bottom nav --- */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      border-top: 2px solid #ff3fa4;
+      background: #000;
+      z-index: 10;
+    }
+
+    .nav-item {
+      flex: 1;
+      text-align: center;
+      padding: 13px 0;
+      font-size: 8px;
+      color: #ff3fa4;
+      cursor: pointer;
+      letter-spacing: 1px;
+    }
+
+    .nav-item.active {
+      color: #fff;
+      text-shadow: 0 0 10px #ff3fa4, 0 0 22px #ff3fa4;
+    }
+
+    .nav-xp {
+      color: #ffd700;
+      text-shadow: 0 0 8px #ffd700;
+      font-size: 11px;
+    }
+
+    /* --- Modal --- */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: #000;
+      border: 2px solid #ff3fa4;
+      box-shadow: 0 0 30px #ff3fa4;
+      padding: 24px 20px;
+      width: 280px;
+    }
+
+    .modal-title {
+      font-size: 7px;
+      color: #ff3fa4;
+      text-shadow: 0 0 8px #ff3fa4;
+      margin-bottom: 16px;
+      letter-spacing: 1px;
+    }
+
+    .modal input[type=number] {
+      width: 100%;
+      background: #0d000d;
+      border: 1px solid #ff3fa4;
+      color: #fff;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 12px;
+      padding: 10px 8px;
+      outline: none;
+      margin-bottom: 14px;
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+
+    .modal input[type=number]::-webkit-inner-spin-button,
+    .modal input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+    .modal-btns { display: flex; gap: 10px; }
+
+    .btn {
+      flex: 1;
+      padding: 10px 0;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 7px;
+      cursor: pointer;
+      border: none;
+      letter-spacing: 1px;
+    }
+
+    .btn-ok { background: #ff3fa4; color: #000; }
+    .btn-ok:hover { background: #ff6ec4; }
+    .btn-cancel { background: transparent; color: #ff3fa4; border: 1px solid #ff3fa4; }

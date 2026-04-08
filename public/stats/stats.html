@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>STATS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stats.css">
+  <script src="stats.js" defer></script>
+</head>
+<body>
+<div class="phone">
+  <div class="exercise-list" id="exerciseList"></div>
+  <div class="bottom-nav">
+    <div class="nav-item active">STATS</div>
+    <div class="nav-item nav-xp">XP</div>
+    <div class="nav-item">USER</div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-title" id="modalTitle">GEWICHT (KG)</div>
+    <input type="number" id="modalInput" step="0.5" min="0" placeholder="0">
+    <div class="modal-btns">
+      <button class="btn btn-ok" onclick="saveWeight()">OK</button>
+      <button class="btn btn-cancel" onclick="closeModal()">X</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
