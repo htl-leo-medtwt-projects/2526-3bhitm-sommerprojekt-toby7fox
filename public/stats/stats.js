@@ -65,7 +65,7 @@ function iconHTML(lvl) {
     case 'Intermediate': return '<div class="icon-diamond icon-inter"></div>';
     case 'Novice':       return '<div class="icon-square"></div>';
     case 'Beginner':     return '<span class="icon-tri">▶</span>';
-    default:             return '<span class="icon-dot">·</span>';
+    default:             return '<span class="icon-tri">▶</span>';
   }
 }
 
@@ -87,13 +87,13 @@ function render() {
 
     return `
       <div class="exercise-card" onclick="openModal('${ex.id}')">
-        <span class="ex-name">${ex.name}</span>
-        <div class="bar-row">
-          <div class="lvl-icon">${iconHTML(inf.level)}</div>
+        <div class="lvl-icon">${iconHTML(inf.level)}</div>
+        <div class="bar">
+          <div class="ex-name">${ex.name}</div>
           <div class="bar-and-level">
             <div class="progress-bar">
               <div class="progress-fill" style="width:${pct}%;background:${fill}"></div>
-              <span class="weight-txt">${fmt(w)} | ${fmt(inf.nextTh)}kg</span>
+              <div class="weight-txt">${fmt(w)} | ${fmt(inf.nextTh)}kg</div>
             </div>
             <div class="lvl-label lvl-${cls}">${inf.level || '---'}</div>
           </div>

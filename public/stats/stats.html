@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -8,25 +9,42 @@
   <link rel="stylesheet" href="stats.css">
   <script src="stats.js" defer></script>
 </head>
-<body>
-<div class="phone">
-  <div class="exercise-list" id="exerciseList"></div>
-  <div class="bottom-nav">
-    <div class="nav-item active">STATS</div>
-    <div class="nav-item nav-xp">XP</div>
-    <div class="nav-item">USER</div>
-  </div>
-</div>
 
-<div class="modal-overlay" id="modal">
-  <div class="modal">
-    <div class="modal-title" id="modalTitle">GEWICHT (KG)</div>
-    <input type="number" id="modalInput" step="0.5" min="0" placeholder="0">
-    <div class="modal-btns">
-      <button class="btn btn-ok" onclick="saveWeight()">OK</button>
-      <button class="btn btn-cancel" onclick="closeModal()">X</button>
+<body>
+  <div class="exercise-list" id="exerciseList">
+
+
+    <div class="exercise-card" onclick="openModal('strictCurl')">
+      <div class="lvl-icon">
+        <div class="icon-diamond"></div>
+      </div>
+      <div class="bar">
+        <div class="ex-name">Strict Curl</div>
+        <div class="bar-and-level">
+          <div class="progress-bar">
+            <div class="progress-fill"
+              style="width:86%; background: repeating-linear-gradient(90deg, #ff9090 0, #ff9090 5px, transparent 5px, transparent 9px);">
+            </div>
+            <div class="weight-txt" flex>58 | 59.5kg</div>
+          </div>
+          <div class="lvl-label lvl-advanced">Advanced</div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="modal-overlay" id="modal">
+    <div class="modal">
+      <div class="modal-title" id="modalTitle">GEWICHT (KG)</div>
+      <input type="number" id="modalInput" step="0.5" min="0" placeholder="0">
+      <div class="modal-btns">
+        <button class="btn btn-ok" onclick="saveWeight()">OK</button>
+        <button class="btn btn-cancel" onclick="closeModal()">X</button>
+      </div>
     </div>
   </div>
-</div>
 </body>
+
 </html>

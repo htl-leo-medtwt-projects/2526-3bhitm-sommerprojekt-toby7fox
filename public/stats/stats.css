@@ -9,15 +9,6 @@
       justify-content: center;
     }
 
-    .phone {
-      width: 100%;
-      max-width: 420px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background: #000;
-    }
-
     .exercise-list {
       flex: 1;
       overflow-y: auto;
@@ -25,26 +16,28 @@
     }
 
     .exercise-card {
-      padding: 12px 10px 10px 10px;
+      margin: 3vh;
+      margin-left: 2.5vh;
+      margin-right: 2.5vh;
       cursor: pointer;
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
     }
 
-    .exercise-card:active { background: #0a000a; }
+    .bar{
+      width: 100%;
+      
+    }
 
     /* Exercise name: top row, alone, with glow */
     .ex-name {
-      font-size: 11px;
+      font-size: 2vh;
       color: #fff;
       text-shadow: 0 0 8px #ff3fa4, 0 0 18px #ff3fa4;
-      margin-bottom: 6px;
       display: block;
-    }
-
-    /* Icon + bar on same row */
-    .bar-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
 
     /* Icon container */
@@ -55,6 +48,7 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      z-index: 100;
     }
 
     /* Elite: gold star with glow */
@@ -67,8 +61,8 @@
 
     /* Advanced/Intermediate: rotated square = diamond */
     .icon-diamond {
-      width: 27px;
-      height: 27px;
+      width: 50px;
+      height: 50px;
       background: #ff9090;
       transform: rotate(45deg);
       flex-shrink: 0;
@@ -105,9 +99,9 @@
     /* Progress bar: black inside, WHITE border, PURPLE outer glow */
     .progress-bar {
       position: relative;
-      height: 22px;
+      height: 4.5vh;
       background: #000;
-      border: 2px solid #fff;
+      border: 1.5vw solid #fff;
       box-shadow: 0 0 10px #cc44ff, 0 0 22px #cc44ff88, 0 0 40px #cc44ff44;
       overflow: hidden;
     }
@@ -127,7 +121,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 7px;
+      font-size: 1.6vh;
       color: #fff;
       z-index: 2;
       white-space: nowrap;
@@ -138,8 +132,8 @@
 
     /* Level label below bar */
     .lvl-label {
-      font-size: 7px;
-      margin-top: 4px;
+      font-size: 1.7vh;
+      margin-top: 0.5vh;
     }
 
     .lvl-elite        { color: #fff; text-shadow: 0 0 8px #ffd700, 0 0 18px #ffd700; }
@@ -149,40 +143,14 @@
     .lvl-beginner     { color: #fff; text-shadow: 0 0 6px #888; }
     .lvl-none         { color: #555; }
 
-    /* --- Bottom nav --- */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 420px;
-      display: flex;
-      border-top: 2px solid #ff3fa4;
-      background: #000;
-      z-index: 10;
-    }
+  
 
-    .nav-item {
-      flex: 1;
-      text-align: center;
-      padding: 13px 0;
-      font-size: 8px;
-      color: #ff3fa4;
-      cursor: pointer;
-      letter-spacing: 1px;
-    }
 
-    .nav-item.active {
-      color: #fff;
-      text-shadow: 0 0 10px #ff3fa4, 0 0 22px #ff3fa4;
-    }
 
-    .nav-xp {
-      color: #ffd700;
-      text-shadow: 0 0 8px #ffd700;
-      font-size: 11px;
-    }
+
+
+
+
 
     /* --- Modal --- */
     .modal-overlay {
