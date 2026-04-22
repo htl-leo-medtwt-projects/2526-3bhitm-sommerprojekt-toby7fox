@@ -11,13 +11,20 @@ if (!isset($_SESSION['user_id'])) {
 
 $userId = (int)$_SESSION['user_id'];
 
-// Ensure the 6 exercises exist
+// Ensure the 6 exercises exist — SELECT first to avoid duplicates
 $exerciseNames = ['Squat', 'Bench Press', 'Deadlift', 'Pull-ups', 'Dips', 'Muscle-up'];
 foreach ($exerciseNames as $exName) {
-    $stmt = $conn->prepare("INSERT IGNORE INTO exercise (exercise) VALUES (?)");
-    $stmt->bind_param("s", $exName);
-    $stmt->execute();
-    $stmt->close();
+    $chk = $conn->prepare("SELECT exercise_ID FROM exercise WHERE exercise = ? LIMIT 1");
+    $chk->bind_param("s", $exName);
+    $chk->execute();
+    $exists = $chk->get_result()->fetch_assoc();
+    $chk->close();
+    if (!$exists) {
+        $ins = $conn->prepare("INSERT INTO exercise (exercise) VALUES (?)");
+        $ins->bind_param("s", $exName);
+        $ins->execute();
+        $ins->close();
+    }
 }
 
 // --- POST: insert new entry ---
@@ -41,13 +48,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $bwStmt->close();
     $bodyWeight = (float)($bwRow['bodyWeight'] ?? 0);
 
+    // Try INSERT with bodyWeight column
     $stmt = $conn->prepare(
         "INSERT INTO Entry (weight, reps, date, bodyWeight, user_user_ID, exercise_exercise_ID)
          VALUES (?, ?, CURDATE(), ?, ?, ?)"
     );
-    $stmt->bind_param("didii", $weight, $reps, $bodyWeight, $userId, $exerciseId);
-    $stmt->execute();
+
+    if (!$stmt) {
+        // bodyWeight column might not exist — insert without it
+        $stmt = $conn->prepare(
+            "INSERT INTO Entry (weight, reps, date, user_user_ID, exercise_exercise_ID)
+             VALUES (?, ?, CURDATE(), ?, ?)"
+        );
+        $stmt->bind_param("diii", $weight, $reps, $userId, $exerciseId);
+    } else {
+        $stmt->bind_param("didii", $weight, $reps, $bodyWeight, $userId, $exerciseId);
+    }
+
+    $ok = $stmt->execute();
+    $err = $stmt->error;
     $stmt->close();
+
+    if (!$ok) {
+        http_response_code(500);
+        echo json_encode(['error' => 'DB error: ' . $err]);
+        exit;
+    }
 
     echo json_encode(['success' => true]);
     exit;

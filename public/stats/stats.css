@@ -12,42 +12,37 @@
     .exercise-list {
       flex: 1;
       overflow-y: auto;
-      padding-bottom: 58px;
+      padding-bottom: 7vh;
     }
 
     .exercise-card {
-      margin: 3vh;
-      margin-left: 5vh;
-      margin-right: 5vh;
+      margin: 3vh 5vh;
       cursor: pointer;
-
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: center;
     }
 
-    .bar{
-      width: 100%;
-      
-    }
+    .bar { width: 100%; }
 
-    /* Exercise name: top row, alone, with glow */
+    /* Exercise name */
     .ex-name {
       font-size: 2vh;
       color: #fff;
-      text-shadow: 0 0 8px #ff3fa4, 0 0 18px #ff3fa4;
+      text-shadow: 0 0 1vh #ff3fa4, 0 0 2.2vh #ff3fa4;
       display: block;
     }
 
     /* Icon container */
     .lvl-icon {
-      width: 38px;
-      height: 38px;
+      width: 10vh;
+      height: 15vh;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      overflow: visible;
       z-index: 100;
     }
 
@@ -58,39 +53,39 @@
 
     /* Elite: gold star */
     .icon-star {
-      width: 72px;
-      height: 72px;
+      width: 10vh;
+      height: 10vh;
       background: #FFD88F;
       clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
     }
 
     /* Advanced: pink diamond */
     .icon-diamond {
-      width: 60px;
-      height: 60px;
+      width: 10vh;
+      height: 10vh;
       background: #FF8F8F;
       clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
     }
 
     /* Intermediate: purple downward triangle */
     .icon-triangle-down {
-      width: 51.2px;
-      height: 44.8px;
+      width: 9vh;
+      height: 8vh;
       background: #E97DFF;
       clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
     }
 
     /* Novice: light-blue square */
     .icon-square {
-      width: 48px;
-      height: 48px;
+      width: 8vh;
+      height: 8vh;
       background: #7DD8FF;
     }
 
     /* Beginner: green circle */
     .icon-circle {
-      width: 44px;
-      height: 44px;
+      width: 7vh;
+      height: 7vh;
       background: #8FFF93;
       border-radius: 50%;
     }
@@ -99,32 +94,30 @@
     .icon-unranked { background: #333; }
 
     /* Glow on the container (applied before clip-path of child) */
-    .lvl-icon-elite        { filter: drop-shadow(0 0 6px #ffd700) drop-shadow(0 0 16px #ffd700); }
-    .lvl-icon-advanced     { filter: drop-shadow(0 0 6px #ff8888) drop-shadow(0 0 16px #ff888888); }
-    .lvl-icon-intermediate { filter: drop-shadow(0 0 6px #cc44ff) drop-shadow(0 0 16px #cc44ff88); }
-    .lvl-icon-novice       { filter: drop-shadow(0 0 6px #66ccff) drop-shadow(0 0 16px #66ccff88); }
-    .lvl-icon-beginner     { filter: drop-shadow(0 0 6px #44ff88) drop-shadow(0 0 16px #44ff8844); }
+    .lvl-icon-elite        { filter: drop-shadow(0 0 0.75vh #ffd700) drop-shadow(0 0 2vh #ffd700); }
+    .lvl-icon-advanced     { filter: drop-shadow(0 0 0.75vh #ff8888) drop-shadow(0 0 2vh #ff888888); }
+    .lvl-icon-intermediate { filter: drop-shadow(0 0 0.75vh #cc44ff) drop-shadow(0 0 2vh #cc44ff88); }
+    .lvl-icon-novice       { filter: drop-shadow(0 0 0.75vh #66ccff) drop-shadow(0 0 2vh #66ccff88); }
+    .lvl-icon-beginner     { filter: drop-shadow(0 0 0.75vh #44ff88) drop-shadow(0 0 2vh #44ff8844); }
 
     /* Bar + level stacked, fills remaining width */
     .bar-and-level { flex: 1; min-width: 0; }
 
-    /* Progress bar: black inside, WHITE border, PURPLE outer glow */
+    /* Progress bar */
     .progress-bar {
       position: relative;
       height: 4.5vh;
       background: #000;
-      border: 0.7vh solid #fff;
-      box-shadow: 0 0 10px #cc44ff, 0 0 22px #cc44ff88, 0 0 40px #cc44ff44;
-
+      border: 0.5vh solid #fff;
+      box-shadow: 0 0 1.2vh #cc44ff, 0 0 2.7vh #cc44ff88, 0 0 5vh #cc44ff44;
       display: flex;
       align-items: center;
-
     }
 
-    /* Fill = vertical color stripes growing left→right */
+    /* Fill stripes */
     .progress-fill {
-      height: 75%;
-      margin: 1vh
+      height: 70%;
+      margin: 0 0.5vh;
     }
 
     /* Weight text centered inside bar */
@@ -138,9 +131,8 @@
       color: #fff;
       z-index: 2;
       white-space: nowrap;
-      letter-spacing: 1px;
-
-      text-shadow: 0 0 8px #ff3fa4, 0 0 18px #ff3fa4;
+      letter-spacing: 0.1vh;
+      text-shadow: 0 0 1vh #ff3fa4, 0 0 2.2vh #ff3fa4;
     }
 
     /* Level label below bar */
@@ -149,21 +141,12 @@
       margin-top: 0.5vh;
     }
 
-    .lvl-elite        { color: #fff; text-shadow: 0 0 8px #ffd700, 0 0 18px #ffd700; }
-    .lvl-advanced     { color: #fff; text-shadow: 0 0 8px #ff8888, 0 0 18px #ff8888; }
-    .lvl-intermediate { color: #fff; text-shadow: 0 0 8px #cc44ff, 0 0 18px #cc44ff; }
-    .lvl-novice       { color: #fff; text-shadow: 0 0 8px #66ccff, 0 0 18px #66ccff; }
-    .lvl-beginner     { color: #fff; text-shadow: 0 0 8px #44ff88, 0 0 18px #44ff88; }
+    .lvl-elite        { color: #fff; text-shadow: 0 0 1vh #ffd700, 0 0 2.2vh #ffd700; }
+    .lvl-advanced     { color: #fff; text-shadow: 0 0 1vh #ff8888, 0 0 2.2vh #ff8888; }
+    .lvl-intermediate { color: #fff; text-shadow: 0 0 1vh #cc44ff, 0 0 2.2vh #cc44ff; }
+    .lvl-novice       { color: #fff; text-shadow: 0 0 1vh #66ccff, 0 0 2.2vh #66ccff; }
+    .lvl-beginner     { color: #fff; text-shadow: 0 0 1vh #44ff88, 0 0 2.2vh #44ff88; }
     .lvl-none         { color: #555; }
-
-  
-
-
-
-
-
-
-
 
     /* --- Modal --- */
     .modal-overlay {
@@ -180,30 +163,30 @@
 
     .modal {
       background: #000;
-      border: 2px solid #ff3fa4;
-      box-shadow: 0 0 30px #ff3fa4;
-      padding: 24px 20px;
-      width: 280px;
+      border: 0.25vh solid #ff3fa4;
+      box-shadow: 0 0 4vh #ff3fa4;
+      padding: 3vh 2.5vh;
+      width: 35vh;
     }
 
     .modal-title {
-      font-size: 7px;
+      font-size: 1vh;
       color: #ff3fa4;
-      text-shadow: 0 0 8px #ff3fa4;
-      margin-bottom: 16px;
-      letter-spacing: 1px;
+      text-shadow: 0 0 1vh #ff3fa4;
+      margin-bottom: 2vh;
+      letter-spacing: 0.1vh;
     }
 
     .modal input[type=number] {
       width: 100%;
       background: #0d000d;
-      border: 1px solid #ff3fa4;
+      border: 0.15vh solid #ff3fa4;
       color: #fff;
       font-family: 'Press Start 2P', monospace;
-      font-size: 12px;
-      padding: 10px 8px;
+      font-size: 1.5vh;
+      padding: 1.2vh 1vh;
       outline: none;
-      margin-bottom: 14px;
+      margin-bottom: 1.7vh;
       -moz-appearance: textfield;
       appearance: textfield;
     }
@@ -211,18 +194,18 @@
     .modal input[type=number]::-webkit-inner-spin-button,
     .modal input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 
-    .modal-btns { display: flex; gap: 10px; }
+    .modal-btns { display: flex; gap: 1.2vh; }
 
     .btn {
       flex: 1;
-      padding: 10px 0;
+      padding: 1.2vh 0;
       font-family: 'Press Start 2P', monospace;
-      font-size: 7px;
+      font-size: 0.9vh;
       cursor: pointer;
       border: none;
-      letter-spacing: 1px;
+      letter-spacing: 0.1vh;
     }
 
     .btn-ok { background: #ff3fa4; color: #000; }
     .btn-ok:hover { background: #ff6ec4; }
-    .btn-cancel { background: transparent; color: #ff3fa4; border: 1px solid #ff3fa4; }
+    .btn-cancel { background: transparent; color: #ff3fa4; border: 0.15vh solid #ff3fa4; }

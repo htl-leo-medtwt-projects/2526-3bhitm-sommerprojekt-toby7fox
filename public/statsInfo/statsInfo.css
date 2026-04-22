@@ -1,0 +1,121 @@
+/* Layout: card top, chart pushed to bottom */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: 58px; /* nav height */
+}
+
+/* Back button */
+.si-back {
+  display: inline-block;
+  padding: 14px 16px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 22px;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 0 0 8px #ff3fa4, 0 0 18px #ff3fa4;
+  line-height: 1;
+}
+
+/* Exercise card area — reuse stats styles, no click */
+#exerciseCard {
+  pointer-events: none;
+  overflow: visible;
+  padding-bottom: 0;
+}
+
+/* Smaller progress bar for statsInfo only */
+#exerciseCard .progress-bar {
+  height: 3vh;
+  margin-right: 3.5vh;
+  overflow: visible;
+}
+
+/* Next level icon at right end of bar */
+.next-lvl-icon {
+  position: absolute;
+  right: -4vh;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.next-lvl-icon .icon-star          { width: 3.5vh; height: 3.5vh; }
+.next-lvl-icon .icon-diamond       { width: 3.2vh; height: 3.2vh; }
+.next-lvl-icon .icon-triangle-down { width: 3.5vh; height: 3vh; }
+.next-lvl-icon .icon-square        { width: 2.7vh; height: 2.7vh; }
+.next-lvl-icon .icon-circle        { width: 2.5vh; height: 2.5vh; }
+
+/* Add entry button */
+.add-btn {
+  display: block;
+  margin: 12px 16px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  padding: 12px 20px;
+  background: #ff3fa4;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 1px;
+  width: calc(100% - 32px);
+}
+
+.add-btn:hover { background: #ff6ec4; }
+
+/* Spacer pushes chart to bottom */
+.si-spacer { flex: 1; }
+
+/* Period selector */
+.period-bar {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px 4px;
+}
+
+.period-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  padding: 7px 10px;
+  background: transparent;
+  border: 1px solid #333;
+  color: #555;
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+
+.period-btn.active,
+.period-btn:hover {
+  border-color: #ff3fa4;
+  color: #fff;
+  text-shadow: 0 0 6px #ff3fa4;
+}
+
+/* Chart */
+.chart-wrap {
+  padding: 0 16px 12px;
+  height: 260px;
+}
+
+/* Modals reuse stats.css .modal-overlay / .modal */
+
+/* Delete button */
+.btn-delete {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 0;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  cursor: pointer;
+  background: transparent;
+  color: #ff4444;
+  border: 1px solid #ff4444;
+  letter-spacing: 1px;
+}
+
+.btn-delete:hover { background: #ff444422; }

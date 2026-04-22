@@ -88,17 +88,16 @@ function render() {
   );
 
   document.getElementById('exerciseList').innerHTML = computed.map(({ ex, entry, eff, inf }) => {
-    const lvl  = inf.level || 'none';
-    const cls  = lvl.toLowerCase();
-    const pct  = Math.round(inf.prog * 100);
-    const c    = COLORS[lvl] || COLORS.none;
-    const fill = `repeating-linear-gradient(90deg,${c} 0,${c} 1.2vh,transparent 5px,transparent 2vh)`;
-    const glow = `drop-shadow(0 0 0.5px ${c}) drop-shadow(0 0 0.5px ${c})`;
-    const cur  = entry ? fmt(eff) : '---';
-    const next = fmt(inf.nextTh);
-
+    const lvl       = inf.level || 'none';
+    const cls       = lvl.toLowerCase();
+    const pct       = Math.round(inf.prog * 100);
+    const c         = COLORS[lvl] || COLORS.none;
+    const fill      = `repeating-linear-gradient(90deg,${c} 0,${c} 8px,transparent 8px,transparent 13px)`;
+    const glow      = `drop-shadow(0 0 4px ${c}) drop-shadow(0 0 10px ${c})`;
+    const cur       = entry ? fmt(eff) : '---';
+    const next      = fmt(inf.nextTh);
     return `
-      <div class="exercise-card" onclick="openModal('${ex.name}')">
+      <div class="exercise-card" onclick="location.href='../statsInfo/statsInfo.php?exercise=${encodeURIComponent(ex.name)}'">
         <div class="lvl-icon lvl-icon-${cls}">${iconHTML(inf.level)}</div>
         <div class="bar">
           <div class="ex-name">${ex.name}</div>
