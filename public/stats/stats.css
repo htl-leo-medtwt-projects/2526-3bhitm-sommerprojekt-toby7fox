@@ -16,7 +16,7 @@
     }
 
     .exercise-card {
-      margin: 3vh 5vh;
+      margin: 3vh 2vh;
       cursor: pointer;
       display: flex;
       flex-direction: row;
@@ -24,7 +24,7 @@
       justify-content: center;
     }
 
-    .bar { width: 100%; }
+    .bar { width: 100%; z-index: 1; position: relative; }
 
     /* Exercise name */
     .ex-name {
@@ -43,7 +43,9 @@
       justify-content: center;
       flex-shrink: 0;
       overflow: visible;
-      z-index: 100;
+      z-index: 2;
+      margin-right: -2vh;
+      padding: 0;
     }
 
     /* All icons: consistent sizing via width/height + clip-path */
@@ -69,23 +71,23 @@
 
     /* Intermediate: purple downward triangle */
     .icon-triangle-down {
-      width: 9vh;
-      height: 8vh;
+      width: 8vh;
+      height: 7vh;
       background: #E97DFF;
       clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
     }
 
     /* Novice: light-blue square */
     .icon-square {
-      width: 8vh;
-      height: 8vh;
+      width: 6vh;
+      height: 6vh;
       background: #7DD8FF;
     }
 
     /* Beginner: green circle */
     .icon-circle {
-      width: 7vh;
-      height: 7vh;
+      width: 6vh;
+      height: 6vh;
       background: #8FFF93;
       border-radius: 50%;
     }
