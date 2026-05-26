@@ -22,7 +22,7 @@ body {
   gap: 2vh;
 }
 
-#logView { display: none; }
+#logView, #historyView { display: none; }
 
 /* ── Rank card ── */
 .xp-rank-card {
@@ -44,6 +44,77 @@ body {
   font-size: 4vh;
   color: #fff;
   text-shadow: 0 0 1.5vh #cc44ff, 0 0 3vh #cc44ff;
+}
+
+/* ── Rank card icon — larger + name overlapping ── */
+.xp-rank-card .xp-icon-beginner     { width: 14vh; height: 14vh; }
+.xp-rank-card .xp-icon-novice       { width: 14vh; height: 15.5vh; }
+.xp-rank-card .xp-icon-intermediate { width: 14vh; height: 14vh; }
+.xp-rank-card .xp-icon-advanced     { width: 13vh; height: 15.5vh; }
+.xp-rank-card .xp-icon-elite        { width: 15vh; height: 13vh; }
+
+.xp-rank-card #rankIcon {
+  position: relative;
+  z-index: 0;
+}
+
+.xp-rank-name {
+  margin-top: -3.5vh;
+  position: relative;
+  z-index: 3;
+}
+
+/* ── XP icons — bronze-to-gold, unique shapes ── */
+
+/* Override glow colors for XP page */
+.lvl-icon-beginner     { filter: drop-shadow(0 0 0.8vh #6B4E1A) drop-shadow(0 0 2vh #6B4E1A88); }
+.lvl-icon-novice       { filter: drop-shadow(0 0 0.8vh #CD7F32) drop-shadow(0 0 2vh #CD7F3288); }
+.lvl-icon-intermediate { filter: drop-shadow(0 0 0.8vh #AAAAAA) drop-shadow(0 0 2vh #AAAAAA88); }
+.lvl-icon-advanced     { filter: drop-shadow(0 0 1vh   #FFD700) drop-shadow(0 0 2.5vh #FFD70088); }
+.lvl-icon-elite        { filter: drop-shadow(0 0 1.2vh #FFE97D) drop-shadow(0 0 3vh   #FFD700); }
+
+.xp-icon { flex-shrink: 0; }
+
+/* Override stats.css .lvl-icon sizing for XP page */
+.lvl-icon {
+  width: auto;
+  height: auto;
+  margin-right: 0;
+}
+
+/* Couch Potato — Hexagon, dark bronze (flat & unremarkable) */
+.xp-icon-beginner {
+  width: 5.5vh; height: 5.5vh;
+  background: #6B4E1A;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+/* Average Joe — Shield, bronze */
+.xp-icon-novice {
+  width: 5.5vh; height: 6vh;
+  background: #CD7F32;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 55%, 50% 100%, 0% 55%);
+}
+
+/* Weekend Warrior — Octagon, silver */
+.xp-icon-intermediate {
+  width: 5.5vh; height: 5.5vh;
+  background: #AAAAAA;
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+}
+
+/* Freak — Lightning bolt, gold */
+.xp-icon-advanced {
+  width: 5vh; height: 6vh;
+  background: #FFD700;
+  clip-path: polygon(58% 0%, 28% 52%, 52% 52%, 42% 100%, 72% 48%, 48% 48%);
+}
+
+/* Sport Fanatic — Crown, bright gold */
+.xp-icon-elite {
+  width: 6vh; height: 5vh;
+  background: #FFE97D;
+  clip-path: polygon(0% 100%, 0% 45%, 18% 65%, 28% 10%, 44% 55%, 50% 0%, 56% 55%, 72% 10%, 82% 65%, 100% 45%, 100% 100%);
 }
 
 /* ── Monthly blocks ── */
@@ -149,6 +220,74 @@ body {
   border-color: #cc44ff;
   color: #fff;
   box-shadow: none;
+}
+
+/* ── History view ── */
+#historyView { gap: 2vh; }
+
+.hist-month {
+  width: 100%;
+  border: 0.2vh solid #1a1a1a;
+  overflow: hidden;
+}
+
+.hist-month-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5vh;
+  padding: 1.2vh 1.5vh;
+  background: #0a0a0a;
+  border-bottom: 0.15vh solid #1a1a1a;
+}
+
+.hist-month-icon { width: 4vh; height: 4vh; }
+.hist-month-icon .icon-star,
+.hist-month-icon .icon-diamond    { width: 3.5vh; height: 3.5vh; }
+.hist-month-icon .icon-triangle-down { width: 3.5vh; height: 3vh; }
+.hist-month-icon .icon-square,
+.hist-month-icon .icon-circle     { width: 3vh; height: 3vh; }
+
+.hist-month-title {
+  flex: 1;
+  font-size: 1vh;
+  color: #cc44ff;
+  text-shadow: 0 0 0.8vh #cc44ff;
+  letter-spacing: 0.1vh;
+}
+
+.hist-month-xp {
+  font-size: 1.2vh;
+  color: #fff;
+  text-shadow: 0 0 0.8vh #cc44ff;
+}
+
+.hist-entry {
+  display: flex;
+  align-items: center;
+  padding: 1vh 1.5vh;
+  border-bottom: 0.1vh solid #111;
+  cursor: pointer;
+  gap: 1vh;
+}
+
+.hist-entry:hover { background: #0d0d0d; }
+.hist-entry:last-child { border-bottom: none; }
+
+.hist-entry-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4vh;
+}
+
+.hist-date  { font-size: 0.8vh; color: #555; }
+.hist-label { font-size: 1vh;   color: #aaa; }
+
+.hist-entry-xp {
+  font-size: 1.1vh;
+  color: #fff;
+  text-shadow: 0 0 0.8vh #cc44ff;
+  white-space: nowrap;
 }
 
 /* ── Log form ── */

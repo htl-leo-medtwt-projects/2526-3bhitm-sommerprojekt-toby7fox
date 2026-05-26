@@ -71,5 +71,39 @@ if ($method === 'POST') {
     exit;
 }
 
+if ($method === 'PUT') {
+    $data    = json_decode(file_get_contents('php://input'), true) ?? [];
+    $id      = (int)($data['activity_ID'] ?? 0);
+    $sets    = (int)($data['sets']    ?? 0);
+    $km      = (float)($data['km']    ?? 0);
+    $hm      = (float)($data['hm']    ?? 0);
+    $meters  = (int)($data['meters']  ?? 0);
+    $hours   = (float)($data['hours'] ?? 0);
+    $intense = (int)(bool)($data['intense'] ?? false);
+    $date    = $data['date'] ?? date('Y-m-d');
+
+    $stmt = $conn->prepare(
+        "UPDATE activity SET date=?, sets=?, km=?, hm=?, meters=?, hours=?, intense=?
+         WHERE activity_ID=? AND user_user_ID=?"
+    );
+    $stmt->bind_param("siddidiii", $date, $sets, $km, $hm, $meters, $hours, $intense, $id, $userId);
+    $ok = $stmt->execute();
+    if (!$ok) { http_response_code(500); echo json_encode(['error' => $stmt->error]); exit; }
+    $stmt->close();
+    echo json_encode(['success' => true]);
+    exit;
+}
+
+if ($method === 'DELETE') {
+    $data = json_decode(file_get_contents('php://input'), true) ?? [];
+    $id   = (int)($data['activity_ID'] ?? 0);
+    $stmt = $conn->prepare("DELETE FROM activity WHERE activity_ID=? AND user_user_ID=?");
+    $stmt->bind_param("ii", $id, $userId);
+    $stmt->execute();
+    $stmt->close();
+    echo json_encode(['success' => true]);
+    exit;
+}
+
 http_response_code(405);
 echo json_encode(['error' => 'Method not allowed']);

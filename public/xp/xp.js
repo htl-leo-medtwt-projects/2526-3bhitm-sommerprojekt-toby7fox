@@ -71,11 +71,11 @@ function projectedRankXP() {
 
 function iconHTML(cls) {
   switch (cls) {
-    case 'elite':        return '<div class="icon-star"></div>';
-    case 'advanced':     return '<div class="icon-diamond"></div>';
-    case 'intermediate': return '<div class="icon-triangle-down"></div>';
-    case 'novice':       return '<div class="icon-square"></div>';
-    default:             return '<div class="icon-circle"></div>';
+    case 'elite':        return '<div class="xp-icon xp-icon-elite"></div>';
+    case 'advanced':     return '<div class="xp-icon xp-icon-advanced"></div>';
+    case 'intermediate': return '<div class="xp-icon xp-icon-intermediate"></div>';
+    case 'novice':       return '<div class="xp-icon xp-icon-novice"></div>';
+    default:             return '<div class="xp-icon xp-icon-beginner"></div>';
   }
 }
 
@@ -124,7 +124,7 @@ function renderStats() {
         </div>`).join('')}
     </div>`;
 
-  document.getElementById('showAllBtn').style.display = 'none';
+  document.getElementById('showAllBtn').style.display = 'block';
 
   const thisMonthXP   = monthlyXP(getMonthKeys(0));
   const projXP        = projectedRankXP();
@@ -143,19 +143,117 @@ function renderStats() {
 
 // ── View switching ────────────────────────────────────────────────────────────
 
-function showStats() {
-  document.getElementById('statsView').style.display = 'flex';
-  document.getElementById('logView').style.display   = 'none';
+function showView(name) {
+  ['statsView','logView','historyView'].forEach(id => {
+    document.getElementById(id).style.display = id === name ? 'flex' : 'none';
+  });
 }
 
-function showLog() {
-  document.getElementById('statsView').style.display = 'none';
-  document.getElementById('logView').style.display   = 'flex';
+function showStats()   { showView('statsView'); }
+function showLog()     { showView('logView'); }
+function showHistory() { renderHistory(); showView('historyView'); }
+
+// ── History view ─────────────────────────────────────────────────────────────
+
+function renderHistory() {
+  const grouped = {};
+  activities.forEach(a => {
+    const key = monthKey(a.date);
+    if (!grouped[key]) grouped[key] = [];
+    grouped[key].push(a);
+  });
+
+  const sortedKeys = Object.keys(grouped).sort((a, b) => b.localeCompare(a));
+
+  document.getElementById('historyList').innerHTML = sortedKeys.map(key => {
+    const [year, month] = key.split('-');
+    const label = new Date(year, month - 1).toLocaleString('en', { month: 'long' }).toUpperCase() + ' ' + year;
+    const totalXP = grouped[key].reduce((sum, a) => sum + calcXP(a), 0);
+    const lvl = getLevel(totalXP);
+
+    const entries = grouped[key].map(a => {
+      const xp = calcXP(a);
+      return `
+        <div class="hist-entry" onclick="openEditActivity(${a.activity_ID})">
+          <div class="hist-entry-info">
+            <span class="hist-date">${a.date}</span>
+            <span class="hist-label">${activityLabel(a)}</span>
+          </div>
+          <div class="hist-entry-xp">${fmtXP(xp)}xp</div>
+        </div>`;
+    }).join('');
+
+    return `
+      <div class="hist-month">
+        <div class="hist-month-header">
+          <div class="lvl-icon lvl-icon-${lvl.cls} hist-month-icon">${iconHTML(lvl.cls)}</div>
+          <div class="hist-month-title">${label}</div>
+          <div class="hist-month-xp">${fmtXP(totalXP)}xp</div>
+        </div>
+        ${entries}
+      </div>`;
+  }).join('');
 }
 
-function toggleShowAll() {
-  showAll = !showAll;
-  renderStats();
+// ── Edit activity modal ───────────────────────────────────────────────────────
+
+let editingActivity = null;
+
+function openEditActivity(id) {
+  editingActivity = activities.find(a => a.activity_ID == id);
+  if (!editingActivity) return;
+
+  const a = editingActivity;
+  document.getElementById('editActivityTitle').textContent = a.type.toUpperCase() + ' — ' + a.date;
+
+  let fields = `<input type="date" id="ea-date" value="${a.date}" style="margin-bottom:1vh">`;
+  if (a.type === 'gym')
+    fields += `<label style="font-size:0.9vh;color:#cc44ff">SETS<br><input type="number" id="ea-sets" value="${a.sets}" min="0"></label>`;
+  if (a.type === 'bike' || a.type === 'run')
+    fields += `<label style="font-size:0.9vh;color:#cc44ff">KM<br><input type="number" id="ea-km" value="${a.km}" step="0.5" min="0"></label>
+               <label style="font-size:0.9vh;color:#cc44ff">HM<br><input type="number" id="ea-hm" value="${a.hm}" step="10" min="0"></label>`;
+  if (a.type === 'swim')
+    fields += `<label style="font-size:0.9vh;color:#cc44ff">METERS<br><input type="number" id="ea-meters" value="${a.meters}" step="50" min="0"></label>`;
+  if (a.type === 'ballsport')
+    fields += `<label style="font-size:0.9vh;color:#cc44ff">HOURS<br><input type="number" id="ea-hours" value="${a.hours}" step="0.5" min="0"></label>
+               <label style="font-size:0.9vh;color:#cc44ff">INTENSE<br><input type="checkbox" id="ea-intense" ${a.intense ? 'checked' : ''}></label>`;
+
+  document.getElementById('editActivityFields').innerHTML = fields;
+  document.getElementById('editActivityModal').classList.add('open');
+}
+
+function closeEditActivity() {
+  document.getElementById('editActivityModal').classList.remove('open');
+  editingActivity = null;
+}
+
+async function saveActivityEdit() {
+  const a = editingActivity;
+  const payload = {
+    activity_ID: a.activity_ID,
+    date:    document.getElementById('ea-date').value,
+    sets:    a.type === 'gym'                      ? +document.getElementById('ea-sets').value    : 0,
+    km:      (a.type === 'bike'||a.type === 'run') ? +document.getElementById('ea-km').value      : 0,
+    hm:      (a.type === 'bike'||a.type === 'run') ? +document.getElementById('ea-hm').value      : 0,
+    meters:  a.type === 'swim'                     ? +document.getElementById('ea-meters').value  : 0,
+    hours:   a.type === 'ballsport'                ? +document.getElementById('ea-hours').value   : 0,
+    intense: a.type === 'ballsport' && document.getElementById('ea-intense').checked,
+  };
+  await fetch('../../api/activity.php', { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+  closeEditActivity();
+  await loadData();
+  renderHistory();
+}
+
+async function deleteActivity() {
+  await fetch('../../api/activity.php', {
+    method: 'DELETE',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ activity_ID: editingActivity.activity_ID }),
+  });
+  closeEditActivity();
+  await loadData();
+  renderHistory();
 }
 
 // ── Log form ─────────────────────────────────────────────────────────────────
