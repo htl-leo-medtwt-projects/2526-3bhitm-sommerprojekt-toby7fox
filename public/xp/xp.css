@@ -1,0 +1,220 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #000;
+  color: #fff;
+  font-family: 'Press Start 2P', monospace;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3vh 2vh 8vh;
+  gap: 2vh;
+}
+
+/* ── Views ── */
+#statsView, #logView {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vh;
+}
+
+#logView { display: none; }
+
+/* ── Rank card ── */
+.xp-rank-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1vh;
+  padding: 2vh 0 1vh;
+}
+
+.xp-rank-name {
+  font-size: 1.8vh;
+  color: #fff;
+  text-shadow: 0 0 1vh #cc44ff, 0 0 2.5vh #cc44ff;
+  letter-spacing: 0.2vh;
+}
+
+.xp-value {
+  font-size: 4vh;
+  color: #fff;
+  text-shadow: 0 0 1.5vh #cc44ff, 0 0 3vh #cc44ff;
+}
+
+/* ── Monthly blocks ── */
+.xp-recent { width: 100%; }
+
+.xp-months {
+  display: flex;
+  justify-content: center;
+  gap: 4vh;
+}
+
+.xp-month {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1vh;
+}
+
+.xp-month-xp {
+  font-size: 1.2vh;
+  color: #fff;
+  text-shadow: 0 0 0.8vh #cc44ff;
+}
+
+.xp-month-label {
+  font-size: 0.9vh;
+  color: #555;
+}
+
+/* ── Show all ── */
+.xp-show-all {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1vh;
+  color: #555;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.1vh;
+}
+
+.xp-show-all:hover { color: #cc44ff; }
+
+/* ── This month ── */
+.xp-this-month {
+  width: 100%;
+  border: 0.2vh solid #cc44ff44;
+  box-shadow: 0 0 1.5vh #cc44ff44;
+  padding: 2vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2vh;
+}
+
+.xp-tm-title {
+  font-size: 1.2vh;
+  color: #cc44ff;
+  text-shadow: 0 0 1vh #cc44ff;
+  letter-spacing: 0.2vh;
+}
+
+.xp-tm-xp {
+  font-size: 2.5vh;
+  color: #fff;
+  text-shadow: 0 0 1vh #cc44ff;
+}
+
+.xp-tm-projected {
+  font-size: 1vh;
+  color: #aaa;
+  text-align: center;
+  line-height: 2;
+}
+
+/* ── Buttons ── */
+.xp-btn {
+  width: 100%;
+  padding: 1.5vh 2vh;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.2vh;
+  letter-spacing: 0.15vh;
+  cursor: pointer;
+  background: transparent;
+  color: #fff;
+  border: 0.3vh solid #cc44ff;
+  text-shadow: 0 0 1vh #cc44ff, 0 0 2vh #cc44ff;
+  box-shadow: 0 0 1.2vh #cc44ff, 0 0 2.5vh #cc44ff66, inset 0 0 1vh #cc44ff22;
+}
+
+.xp-btn:hover {
+  background: #cc44ff22;
+  box-shadow: 0 0 2vh #cc44ff, 0 0 4vh #cc44ff88, inset 0 0 1.5vh #cc44ff44;
+}
+
+.xp-btn-back {
+  border-color: #444;
+  box-shadow: none;
+  text-shadow: none;
+  color: #777;
+}
+
+.xp-btn-back:hover {
+  border-color: #cc44ff;
+  color: #fff;
+  box-shadow: none;
+}
+
+/* ── Log form ── */
+.log-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8vh;
+  padding: 1.5vh 0;
+  border-bottom: 0.15vh solid #1a1a1a;
+}
+
+.log-label {
+  font-size: 1vh;
+  color: #cc44ff;
+  text-shadow: 0 0 0.8vh #cc44ff;
+  letter-spacing: 0.15vh;
+}
+
+.log-counter {
+  display: flex;
+  align-items: center;
+  gap: 2vh;
+}
+
+.log-counter button {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 2vh;
+  width: 4vh;
+  height: 4vh;
+  background: transparent;
+  color: #fff;
+  border: 0.2vh solid #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.log-counter button:hover { border-color: #cc44ff; color: #cc44ff; }
+
+.log-counter span {
+  font-size: 1.6vh;
+  color: #fff;
+  min-width: 7vh;
+  text-align: center;
+}
+
+.log-intensity {
+  margin-top: 0.5vh;
+}
+
+.log-intensity button {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1vh;
+  padding: 0.8vh 1.5vh;
+  background: transparent;
+  color: #888;
+  border: 0.2vh solid #333;
+  cursor: pointer;
+  letter-spacing: 0.1vh;
+}
+
+.log-intensity button.intense {
+  color: #fff;
+  border-color: #ff8f8f;
+  text-shadow: 0 0 0.8vh #ff8f8f;
+  box-shadow: 0 0 1vh #ff8f8f66;
+}

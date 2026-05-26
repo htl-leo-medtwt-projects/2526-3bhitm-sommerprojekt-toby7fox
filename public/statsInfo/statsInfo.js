@@ -162,10 +162,10 @@ function renderChart() {
       labels,
       datasets: [{
         data: values,
-        borderColor: '#ff3fa4',
-        backgroundColor: '#ff3fa411',
-        pointBackgroundColor: '#ff3fa4',
-        pointBorderColor: '#ff3fa4',
+        borderColor: '#cc44ff',
+        backgroundColor: '#cc44ff18',
+        pointBackgroundColor: '#cc44ff',
+        pointBorderColor: '#cc44ff',
         pointRadius: 6,
         pointHoverRadius: 9,
         borderWidth: 2,
@@ -186,18 +186,18 @@ function renderChart() {
           bodyFont:  { family: "'Press Start 2P'", size: 8 },
           titleFont: { family: "'Press Start 2P'", size: 8 },
           backgroundColor: '#111',
-          borderColor: '#ff3fa4',
+          borderColor: '#cc44ff',
           borderWidth: 1,
         }
       },
       scales: {
         x: {
           ticks: { color: '#888', font: { family: "'Press Start 2P'", size: 7 }, maxRotation: 0 },
-          grid:  { color: '#ff3fa411' },
+          grid:  { color: '#cc44ff18' },
         },
         y: {
           ticks: { color: '#888', font: { family: "'Press Start 2P'", size: 7 }, callback: v => v + 'kg' },
-          grid:  { color: '#ff3fa422' },
+          grid:  { color: '#cc44ff28' },
         }
       }
     }

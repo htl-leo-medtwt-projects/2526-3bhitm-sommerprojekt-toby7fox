@@ -112,12 +112,17 @@ $stmt->close();
       font-size: 8px;
       letter-spacing: 1px;
       cursor: pointer;
-      border: none;
-      background: #cc44ff;
-      color: #000;
+      background: transparent;
+      color: #fff;
+      border: 2px solid #cc44ff;
+      text-shadow: 0 0 6px #cc44ff, 0 0 14px #cc44ff;
+      box-shadow: 0 0 8px #cc44ff, 0 0 18px #cc44ff66, inset 0 0 8px #cc44ff22;
     }
 
-    .btn-save:hover { background: #dd66ff; }
+    .btn-save:hover {
+      background: #cc44ff22;
+      box-shadow: 0 0 14px #cc44ff, 0 0 28px #cc44ff88, inset 0 0 12px #cc44ff44;
+    }
 
     .btn-logout {
       width: 100%;
@@ -128,18 +133,18 @@ $stmt->close();
       letter-spacing: 1px;
       cursor: pointer;
       background: transparent;
-      color: #cc44ff;
-      border: 1px solid #cc44ff;
-      box-shadow: 0 0 8px #cc44ff44;
+      color: #fff;
+      border: 2px solid #cc44ff;
+      text-shadow: 0 0 6px #cc44ff, 0 0 14px #cc44ff;
+      box-shadow: 0 0 8px #cc44ff, 0 0 18px #cc44ff66, inset 0 0 8px #cc44ff22;
       text-align: center;
       text-decoration: none;
       display: block;
     }
 
     .btn-logout:hover {
-      color: #fff;
-      border-color: #dd66ff;
-      box-shadow: 0 0 14px #cc44ff88;
+      background: #cc44ff22;
+      box-shadow: 0 0 14px #cc44ff, 0 0 28px #cc44ff88, inset 0 0 12px #cc44ff44;
     }
 
     .msg {

@@ -1,0 +1,40 @@
+set: 10xp
+
+1h intense ball sport & co: 100xp
+1h ball sport & co: 60xp
+
+km:
+bike: 2.5xp
+run: 5xp
+
+hm:
+bike: 0.25xp
+run: 0.5xp
+
+
+das ist jetzt die xp seite die zum umsetzen ist. man soll eintragen können:
+
+set: 10xp
+
+1h intense ball sport & co: 100xp
+1h ball sport & co: 60xp
+
+km:
+bike: 2.5xp
+run: 5xp
+
+hm:
+bike: 0.25xp
+run: 0.5xp
+
+diese werden in die datenbank immer z.b als eine radtour mit datum, km, hm eingetragen und dann später erst im code als xp ausgewertet
+
+level sind:
+Couch potato: <120xp
+Average Joe: 120-240xp
+Weekend warrior: 1600-3000
+Freak: 3000-5000
+Sport fanatic: 5000+
+
+
+sein jetziges level setzt sich immer aus dem durchschnitt der drei vorherigen monate zusammen, unten wird angezeigt auf wleches level man landen würde sobald das jetzige monat eingerechnet wird

@@ -84,16 +84,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     label {
       font-size: 7px;
-      color: #ff3fa4;
-      text-shadow: 0 0 6px #ff3fa4;
+      color: #cc44ff;
+      text-shadow: 0 0 6px #cc44ff;
       letter-spacing: 1px;
     }
 
     input, select {
       width: 100%;
       background: #0d000d;
-      border: 1px solid #ff3fa4;
-      box-shadow: 0 0 8px #ff3fa444;
+      border: 1px solid #cc44ff;
+      box-shadow: 0 0 8px #cc44ff44;
       color: #fff;
       font-family: 'Press Start 2P', monospace;
       font-size: 11px;
@@ -104,8 +104,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     input:focus, select:focus {
-      border-color: #ff6ec4;
-      box-shadow: 0 0 12px #ff3fa488;
+      border-color: #dd77ff;
+      box-shadow: 0 0 12px #cc44ff88;
     }
 
     input::-webkit-inner-spin-button,
@@ -120,13 +120,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       font-size: 8px;
       letter-spacing: 1px;
       cursor: pointer;
-      border: none;
-      background: #ff3fa4;
-      color: #000;
+      background: transparent;
+      color: #fff;
+      border: 2px solid #cc44ff;
       margin-top: 6px;
+      text-shadow: 0 0 6px #cc44ff, 0 0 14px #cc44ff;
+      box-shadow: 0 0 8px #cc44ff, 0 0 18px #cc44ff66, inset 0 0 8px #cc44ff22;
     }
 
-    .btn-submit:hover { background: #ff6ec4; }
+    .btn-submit:hover {
+      background: #cc44ff22;
+      box-shadow: 0 0 14px #cc44ff, 0 0 28px #cc44ff88, inset 0 0 12px #cc44ff44;
+    }
 
     .auth-link {
       font-size: 7px;
@@ -135,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       letter-spacing: 1px;
     }
 
-    .auth-link:hover { color: #ff3fa4; }
+    .auth-link:hover { color: #cc44ff; }
 
     .error {
       font-size: 7px;
