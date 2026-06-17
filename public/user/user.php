@@ -10,6 +10,8 @@ $userId  = (int)$_SESSION['user_id'];
 $success = false;
 $error   = '';
 
+$conn->query("ALTER TABLE `user` ADD COLUMN IF NOT EXISTS profile_picture VARCHAR(255) DEFAULT NULL");
+
 // Handle bodyweight update
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $bw = (float)($_POST['bodyWeight'] ?? 0);
@@ -25,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Fetch user data
-$stmt = $conn->prepare("SELECT username, bodyWeight FROM `user` WHERE user_ID = ?");
+$stmt = $conn->prepare("SELECT username, bodyWeight, profile_picture FROM `user` WHERE user_ID = ?");
 $stmt->bind_param("i", $userId);
 $stmt->execute();
 $user = $stmt->get_result()->fetch_assoc();
@@ -147,6 +149,61 @@ $stmt->close();
       box-shadow: 0 0 14px #cc44ff, 0 0 28px #cc44ff88, inset 0 0 12px #cc44ff44;
     }
 
+    .avatar-wrap {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .avatar-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #cc44ff;
+      box-shadow: 0 0 12px #cc44ff, 0 0 28px #cc44ff66;
+      display: block;
+    }
+
+    .avatar-placeholder {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #cc44ff;
+      box-shadow: 0 0 12px #cc44ff, 0 0 28px #cc44ff66;
+      background: #0d000d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: #cc44ff;
+      text-shadow: 0 0 10px #cc44ff;
+    }
+
+    .avatar-overlay {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: #00000088;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6px;
+      color: #cc44ff;
+      letter-spacing: 1px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .avatar-wrap:hover .avatar-overlay { opacity: 1; }
+
+    .avatar-uploading .avatar-overlay {
+      opacity: 1;
+      color: #aaa;
+    }
+
     .msg {
       font-size: 7px;
       letter-spacing: 1px;
@@ -158,6 +215,21 @@ $stmt->close();
 <body>
 
   <div class="user-title">— USER —</div>
+
+  <div class="avatar-wrap" id="avatarWrap" onclick="document.getElementById('avatarInput').click()">
+    <?php if (!empty($user['profile_picture'])): ?>
+      <img id="avatarImg" class="avatar-img"
+           src="../<?= htmlspecialchars($user['profile_picture']) ?>?t=<?= time() ?>"
+           alt="avatar">
+    <?php else: ?>
+      <div id="avatarImg" class="avatar-placeholder">
+        <?= htmlspecialchars(strtoupper(mb_substr($user['username'], 0, 1))) ?>
+      </div>
+    <?php endif; ?>
+    <div class="avatar-overlay" id="avatarOverlay">CHANGE</div>
+  </div>
+  <input type="file" id="avatarInput" accept="image/*" style="display:none">
+
   <div class="username"><?= htmlspecialchars($user['username']) ?></div>
 
   <form class="section" method="POST">
@@ -173,6 +245,43 @@ $stmt->close();
   </form>
 
   <a href="../../api/auth.php?action=logout" class="btn-logout">LOGOUT</a>
+
+  <script>
+    document.getElementById('avatarInput').addEventListener('change', async function () {
+      const file = this.files[0];
+      if (!file) return;
+
+      const wrap = document.getElementById('avatarWrap');
+      const overlay = document.getElementById('avatarOverlay');
+      wrap.classList.add('avatar-uploading');
+      overlay.textContent = '...';
+
+      const formData = new FormData();
+      formData.append('avatar', file);
+
+      const res  = await fetch('../../api/avatar.php', { method: 'POST', body: formData });
+      const data = await res.json();
+
+      wrap.classList.remove('avatar-uploading');
+      overlay.textContent = 'CHANGE';
+
+      if (data.success) {
+        const existing = document.getElementById('avatarImg');
+        if (existing.tagName === 'IMG') {
+          existing.src = '../' + data.path + '?t=' + Date.now();
+        } else {
+          const img = document.createElement('img');
+          img.id        = 'avatarImg';
+          img.className = 'avatar-img';
+          img.alt       = 'avatar';
+          img.src       = '../' + data.path + '?t=' + Date.now();
+          existing.replaceWith(img);
+        }
+      }
+
+      this.value = '';
+    });
+  </script>
 
   <?php $nav_active = 'user'; require_once '../shared/nav.php'; ?>
 </body>
