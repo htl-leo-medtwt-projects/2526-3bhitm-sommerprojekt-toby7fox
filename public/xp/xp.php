@@ -27,7 +27,6 @@ if (!isset($_SESSION['user_id'])) {
     </div>
 
     <div class="xp-recent" id="recentList"></div>
-    <button id="showAllBtn" class="xp-show-all" onclick="showHistory()">show all</button>
 
     <div class="xp-this-month">
       <div class="xp-tm-title">This month</div>
@@ -37,25 +36,6 @@ if (!isset($_SESSION['user_id'])) {
     </div>
 
     <button class="xp-btn" onclick="showLog()">LOG</button>
-  </div>
-
-  <!-- History view -->
-  <div id="historyView">
-    <div id="historyList"></div>
-    <button class="xp-btn xp-btn-back" onclick="showStats()">BACK</button>
-  </div>
-
-  <!-- Edit modal -->
-  <div class="modal-overlay" id="editActivityModal">
-    <div class="modal">
-      <div class="modal-title" id="editActivityTitle"></div>
-      <div id="editActivityFields"></div>
-      <div class="modal-btns">
-        <button class="btn btn-ok"     onclick="saveActivityEdit()">SAVE</button>
-        <button class="btn btn-cancel" onclick="closeEditActivity()">X</button>
-      </div>
-      <button class="btn-delete" onclick="deleteActivity()">DELETE</button>
-    </div>
   </div>
 
   <!-- Log view -->

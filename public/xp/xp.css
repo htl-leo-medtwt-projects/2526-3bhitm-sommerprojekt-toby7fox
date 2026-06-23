@@ -22,7 +22,7 @@ body {
   gap: 2vh;
 }
 
-#logView, #historyView { display: none; }
+#logView { display: none; }
 
 /* ── Rank card ── */
 .xp-rank-card {
@@ -220,74 +220,6 @@ body {
   border-color: #cc44ff;
   color: #fff;
   box-shadow: none;
-}
-
-/* ── History view ── */
-#historyView { gap: 2vh; }
-
-.hist-month {
-  width: 100%;
-  border: 0.2vh solid #1a1a1a;
-  overflow: hidden;
-}
-
-.hist-month-header {
-  display: flex;
-  align-items: center;
-  gap: 1.5vh;
-  padding: 1.2vh 1.5vh;
-  background: #0a0a0a;
-  border-bottom: 0.15vh solid #1a1a1a;
-}
-
-.hist-month-icon { width: 4vh; height: 4vh; }
-.hist-month-icon .icon-star,
-.hist-month-icon .icon-diamond    { width: 3.5vh; height: 3.5vh; }
-.hist-month-icon .icon-triangle-down { width: 3.5vh; height: 3vh; }
-.hist-month-icon .icon-square,
-.hist-month-icon .icon-circle     { width: 3vh; height: 3vh; }
-
-.hist-month-title {
-  flex: 1;
-  font-size: 1vh;
-  color: #cc44ff;
-  text-shadow: 0 0 0.8vh #cc44ff;
-  letter-spacing: 0.1vh;
-}
-
-.hist-month-xp {
-  font-size: 1.2vh;
-  color: #fff;
-  text-shadow: 0 0 0.8vh #cc44ff;
-}
-
-.hist-entry {
-  display: flex;
-  align-items: center;
-  padding: 1vh 1.5vh;
-  border-bottom: 0.1vh solid #111;
-  cursor: pointer;
-  gap: 1vh;
-}
-
-.hist-entry:hover { background: #0d0d0d; }
-.hist-entry:last-child { border-bottom: none; }
-
-.hist-entry-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4vh;
-}
-
-.hist-date  { font-size: 0.8vh; color: #555; }
-.hist-label { font-size: 1vh;   color: #aaa; }
-
-.hist-entry-xp {
-  font-size: 1.1vh;
-  color: #fff;
-  text-shadow: 0 0 0.8vh #cc44ff;
-  white-space: nowrap;
 }
 
 /* ── Log form ── */
